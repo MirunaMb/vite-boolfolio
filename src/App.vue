@@ -52,6 +52,7 @@ export default {
       <li v-for="link in pagination.links" :key="link.label" @click="fetchProjects(link.url)" class="page-item">
         <a class="page-link" href="#" v-html="link.label"></a>
         <!-- v-htlm interpreta html in vue -->
+        <!-- commento -->
       </li>
     </ul>
   </nav>
