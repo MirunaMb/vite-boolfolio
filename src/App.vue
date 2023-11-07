@@ -1,6 +1,6 @@
 <script>
 import ProjectList from "./components/projects/ProjectList.vue";
-
+import NavbarUi from "./components/ui/NavbarUi.vue";
 import axios from 'axios';
 export default {
   data() {
@@ -20,7 +20,7 @@ export default {
   },
 
   components: {
-    ProjectList,
+    ProjectList, NavbarUi
   },
 
   methods: {
@@ -47,12 +47,14 @@ export default {
 </script>
 
 <template>
+  <NavbarUi />
+  <router-view></router-view>
   <nav aria-label="Page navigation example">
     <ul class="pagination">
       <li v-for="link in pagination.links" :key="link.label" @click="fetchProjects(link.url)" class="page-item">
         <a class="page-link" href="#" v-html="link.label"></a>
         <!-- v-htlm interpreta html in vue -->
-        <!-- commento -->
+
       </li>
     </ul>
   </nav>
