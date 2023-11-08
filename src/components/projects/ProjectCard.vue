@@ -46,7 +46,12 @@ export default {
             </div>
 
             <div class="card-footer">
-                <a href="#" class="btn btn-primary">Vedi</a>
+                <router-link :to="{
+                    name: 'project-detail',
+                    params: {
+                        id: project.id
+                    }
+                }" class="btn btn-primary">Vedi</router-link>
             </div>
 
         </div>
