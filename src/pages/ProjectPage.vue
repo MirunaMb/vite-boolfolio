@@ -30,7 +30,7 @@ export default {
 <template>
     <div class="container my-5">
         <h1 class="my-5">Dettaglio project</h1>
-        <ProjectCard :project="project" />
+        <ProjectCard :project="project" :isDetail="true" v-if="project" />
     </div>
 </template>
 

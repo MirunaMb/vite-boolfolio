@@ -50,7 +50,7 @@ export default {
   <div class="container">
     <h2>ProjectList</h2>
     <div class="row row-cols-3 g-4">
-      <ProjectCard v-for="project in projects" :project="project" />
+      <ProjectCard v-for="project in projects" :isDetail="false" :project="project" />
     </div>
   </div>
   <nav aria-label="Page navigation example">
