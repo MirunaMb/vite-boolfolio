@@ -2,6 +2,7 @@ import { createWebHistory, createRouter } from 'vue-router';
 import HomePage from '../pages/HomePage.vue';
 import BlogPage from '../pages/BlogPage.vue';
 import ProjectPage from '../pages/ProjectPage.vue';
+import BlogTypePage from '../pages/BlogTypePage.vue';
 
 const router = createRouter({
     history: createWebHistory(),
@@ -20,6 +21,11 @@ const router = createRouter({
             path: '/blog/:id',
             name: 'project-detail',
             component: ProjectPage,
+        },
+        {
+            path: '/blog/type/:type_id',
+            name: 'blog-type',
+            component: BlogTypePage,
         }
     ]
 });
