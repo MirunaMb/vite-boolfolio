@@ -1,10 +1,15 @@
 <script>
 import ProjectCard from './ProjectCard.vue';
+import { store } from '../../data/store';
 import axios from 'axios';
 export default {
+  props: {
+    type_id: {
+      type: Number,
+    },
+  },
   data() {
     return {
-      title: "ProjecList",
       projects: [],
       api: {
         baseUrl: 'http://127.0.0.1:8000/api/',
@@ -27,7 +32,7 @@ export default {
     this.fetchProjects();
   },
   methods: {
-    fetchProjects(uri = this.api.baseUrl + 'projects') {
+    fetchProjects(uri = this.endpoint) {
       axios.get(uri)
         .then((response) => {
           this.projects = response.data.data;
@@ -39,6 +44,13 @@ export default {
           console.error(error);
         });
     }
+  },
+  computed: {
+    endpoint() {
+      return this.type_id ?
+        store.api.baseUrl + 'project-by-type/' + this.type_id :
+        this.api.baseUrl + 'projects';
+    },
   },
 
 
