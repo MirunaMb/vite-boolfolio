@@ -1,6 +1,6 @@
 <script>
 
-import ProjectTypeList from '../components/projects/ProjectTypeList.vue';
+import ProjectList from '../components/projects/ProjectList.vue';
 
 import { store } from '../data/store';
 import axios from 'axios';
@@ -12,7 +12,7 @@ export default {
     },
 
 
-    components: { ProjectTypeList },
+    components: { ProjectList },
 
 
     created() {
@@ -32,7 +32,7 @@ export default {
         <h1 class="my-5">Projects by type
             <span v-if="type && type.id" class="badge mx-1" :style="{ backgroundColor: type.color }">{{ type.name }}</span>
         </h1>
-        <ProjectTypeList :type_id="type ? type.id : null" v-if="type" />
+        <ProjectList :type_id="type ? type.id : null" v-if="type" />
         <!-- usa la lista -->
     </div>
 </template>
