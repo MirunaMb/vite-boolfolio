@@ -8,6 +8,7 @@ export default {
         return {
             filteredProjects: [],
             types: [],
+            technologies: [],
         };
     },
     components: { ProjectCard },
@@ -16,16 +17,22 @@ export default {
     methods: {
         fetchProjects() {
             const activeTypes = [];
+            const activeTechnologies = [];
 
             this.types.forEach((type) => {
                 if (type.active) activeTypes.push(type.id);
             });
+            this.technologies.forEach((technology) => {
+                if (technology.active) activeTechnologies.push(technology.id);
+            });
 
             // console.log(activeTypes);
+            console.log(activeTechnologies);
 
             axios.get(store.api.baseUrl + 'get-projects-by-filters', {
                 params: {
                     activeTypes,
+                    activeTechnologies
                 },
             }).then((response) => {
                 this.filteredProjects = response.data.data;
@@ -48,14 +55,48 @@ export default {
                     console.error(error);
                 });
         },
+        fetchTechnologies() {
+            axios.get(store.api.baseUrl + 'technology')
+                .then((response) => {
+                    this.technologies = response.data.map((technology) => {
+                        return {
+                            ...technology,
+                            active: false
+                        }
+                    });
+                    console.log(this.technologies);
+                })
+                .catch((error) => {
+                    console.error(error);
+                });
+        },
+
+
+        getBadgeTechnology(technology) {
+            if (technology.name_technologies === 'Tecnologia1') {
+                return 'badge-red';
+            }
+            else if (technology.name_technologies === 'Tecnologia2') {
+                return 'badge-blue';
+            }
+            else {
+                return 'badge-green';
+            }
+        },
+
 
         toggleType(type) {
             type.active = !type.active;
+            this.fetchProjects();
+        },
+        toggleTechnology(technology) {
+            technology.active = !technology.active;
             this.fetchProjects();
         }
     },
 
     created() {
+        this.fetchTechnologies();
         this.fetchTypes();
         this.fetchProjects();
     }
@@ -77,6 +118,12 @@ export default {
 
                 <hr />
                 <h4>Seleziona le technologie</h4>
+                <span v-for="technology in technologies" :key="technology.id" class="badge mx-1 clickable"
+                    :class="[getBadgeTechnology(technology), { 'disabled': !technology.active }]"
+                    @click="toggleTechnology(technology)">
+                    {{ technology.name_technologies }}
+                </span>
+
 
             </div>
             <div class="col-9">
@@ -99,5 +146,20 @@ export default {
 
 .clickable {
     cursor: pointer;
+}
+
+.badge-red {
+    background-color: red;
+    color: white;
+}
+
+.badge-blue {
+    background-color: blue;
+    color: white;
+}
+
+.badge-green {
+    background-color: green;
+    color: white;
 }
 </style>
