@@ -34,6 +34,11 @@ export default {
                             Blog
                         </router-link>
                     </li>
+                    <li class="nav-item">
+                        <router-link class="nav-link" aria-current="page" :to="{ name: 'advanced-filter' }">
+                            Ricerca avanzata
+                        </router-link>
+                    </li>
 
                 </ul>
             </div>
